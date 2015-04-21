@@ -19,6 +19,8 @@ RUN cd /opt && \
     git clone https://github.com/phacility/phabricator.git && \
     rm /etc/nginx/sites-enabled/default
 
+RUN pear config-set preferred_state beta && pecl install APCu
+
 COPY files /
 
 #
