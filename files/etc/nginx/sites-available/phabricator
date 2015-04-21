@@ -1,0 +1,21 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	server_name _;
+
+	root /opt/phabricator/webroot;
+
+	location / {
+		index index.php;
+		rewrite ^/(.*)$ /index.php?__path__=/$1 last;
+	}
+
+	location = /favicon.ico {
+		try_files $uri =204;
+	}
+
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass 127.0.0.1:9000;
+	}
+}
