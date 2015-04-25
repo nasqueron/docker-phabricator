@@ -1,0 +1,27 @@
+#!/bin/sh
+
+PHD=/opt/phabricator/bin/phd
+
+#
+# Signals handling
+#
+
+on_stop()
+{
+	$PHD stop
+	exit 1
+}
+
+trap on_stop INT
+trap on_stop TERM
+
+#
+# Starts Phabricator daemon, then waits for signals.
+#
+
+$PHD start
+
+while :
+do
+	sleep 0.2
+done

@@ -10,16 +10,19 @@ MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-w
 #
 
 RUN apt-get update && apt-get install -y \
-    git mercurial subversion python-pygments openssh-client mysql-client \
-    --no-install-recommends && rm -r /var/lib/apt/lists/*
-
+            git mercurial subversion python-pygments openssh-client \
+            mysql-client \
+            --no-install-recommends && rm -r /var/lib/apt/lists/* && \
+    pear config-set preferred_state beta && \
+    pecl install APCu
+	
 RUN cd /opt && \
     git clone https://github.com/phacility/libphutil.git && \
     git clone https://github.com/phacility/arcanist.git && \
     git clone https://github.com/phacility/phabricator.git && \
-    rm /etc/nginx/sites-enabled/default
-
-RUN pear config-set preferred_state beta && pecl install APCu
+    rm /etc/nginx/sites-enabled/default && \
+    mkdir -p /var/tmp/phd && \
+    chown app:app /var/tmp/phd
 
 COPY files /
 
@@ -28,5 +31,3 @@ COPY files /
 #
 
 VOLUME ["/opt/phabricator/conf/local", "/var/repo"]
-
-#INIT
