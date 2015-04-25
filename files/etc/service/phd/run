@@ -1,4 +1,7 @@
 #!/bin/bash
 exec 2>&1
+if [ ! -f started ]; then
+	sleep 10
+	touch started
+fi
 exec chpst -u app:app /usr/local/bin/phd-wrapper
-
