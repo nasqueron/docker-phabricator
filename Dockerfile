@@ -10,7 +10,7 @@ MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-w
 #
 
 RUN apt-get update && apt-get install -y \
-            git mercurial subversion python-pygments openssh-client \
+            mercurial subversion python-pygments openssh-client \
             mysql-client \
             --no-install-recommends && rm -r /var/lib/apt/lists/* && \
     pear config-set preferred_state beta && \
