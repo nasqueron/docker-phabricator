@@ -20,7 +20,7 @@ RUN cd /opt && \
     git clone https://github.com/phacility/libphutil.git && \
     git clone https://github.com/phacility/arcanist.git && \
     git clone https://github.com/phacility/phabricator.git && \
-    rm /etc/nginx/sites-enabled/default && \
+    rm -f /etc/nginx/sites-enabled/default && \
     mkdir -p /var/tmp/phd && \
     chown app:app /var/tmp/phd
 
