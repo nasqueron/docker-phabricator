@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+pushd /opt/phabricator
+
+# MYSQL
+bin/config set mysql.host mysql
+bin/config set mysql.pass $MYSQL_ENV_MYSQL_ROOT_PASSWORD
+if [ -n "$PHABRICATOR_STORAGE_NAMESPACE" ]; then
+	bin/config set storage.default-namespace $PHABRICATOR_STORAGE_NAMESPACE
+fi
+
+# URLs
+bin/config set phabricator.base-uri $PHABRICATOR_URL
+if [ -n "$PHABRICATOR_ALT_FILE_DOMAIN" ]; then
+	bin/config set security.alternate-file-domain "$PHABRICATOR_ALT_FILE_DOMAIN"
+fi
+
+# Mail
+if [ -n "$PHABRICATOR_USE_MAILGUN" ] && [ -n "$PHABRICATOR_DOMAIN" ] ; then
+	bin/config set mailgun.domain $PHABRICATOR_DOMAIN
+fi
+
+# Rights
+chown -R app /var/repo
+
+# We're done
+popd
+touch .initialized
