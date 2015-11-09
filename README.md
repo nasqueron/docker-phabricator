@@ -18,14 +18,14 @@ This container doesn't provide but rely on:
 
 ## Launch a Phabricator container
 
-1. Run a MySQL container:
+Step 1. Run a MySQL container:
 
 ```
 docker pull nasqueron/mysql
 docker run -dt --name phabricator-mysql nasqueron/mysql
 ```
 
-2. Create a directory (or a Docker volume) to host repositories and config:
+Step 2. Create a directory (or a Docker volume) to host repositories and config:
 ```
 
 mkdir /data/phabricator
@@ -34,7 +34,7 @@ mkdir /data/phabricator
 If you omit this step, the container will automatically use volumes.
 In such case, remove the -v lines in step 3.
 
-3. Run the Phabricator container:
+Step 3. Run the Phabricator container:
 
 ```
 docker pull nasqueron/phabricator
@@ -52,7 +52,7 @@ docker run -t -d \
 
 If you don't want to separate static files and main app domains, you can omit PHABRICATOR_ALT_FILE_DOMAIN.
 
-3. If you wish an Aphlict notification server:
+Step 4. If you wish an Aphlict notification server:
 
 ```
 docker pull nasqueron/aphlict
@@ -61,7 +61,7 @@ docker run -dt --name aphlict nasqueron/aphlict
 
 It will listen to default ports 2280-22281.
 
-Note: you only need one Aphlict container for several Phabricator instances.
+**Note:** you only need one Aphlict container for several Phabricator instances.
 
 ## Advanced usage
 
@@ -70,11 +70,38 @@ If you need avanced features, we also provide tweaks to:
 * add a service to run PhabricatorBot, the shipped IRC bot
 * deploy your own Phabricator code
 
-We're currently working on:
+### Deploy your own Phabricator code
+
+So we currently have a container with the upstream code in master branch. To deploy your own code, we need to pull from your private repository a specific branch.
+
+We suggest you create a script with the following code to first log in to the server and so accept the server host SSH key, then clone the repository.
+
+Put your keys in the conf volume. If you followed the default instructions, put them on the host in `/data/phabricator/conf/deploy-keys` folder.
+
+```
+setenv INSTANCE_NAME phabricator
+setenv PHABRICATOR_PROD_REPO ssh://git@github.com/yourorganization/yourrepo.git
+setenv PHABRICATOR_PROD_BRANCH production
+REPO_LOGIN=git
+REPO_HOST=bitbucket.org
+
+docker exec $INSTANCE_NAME sh -c 'mkdir -p /root/.ssh && \
+        cp /opt/phabricator/conf/deploy-keys/* /root/.ssh'
+docker exec $INSTANCE_NAME ssh -o StrictHostKeyChecking=no ${REPO_LOGIN}@${REPO_HOST}
+docker exec $INSTANCE_NAME sh -c 'cd /opt/phabricator && \
+        git remote add private "$PHABRICATOR_PROD_REPO" && \
+        git fetch --all && \
+        git checkout $PHABRICATOR_PROD_BRANCH && \
+        sv restart php-fpm'
+```
+
+### We're currently working on:
 
 * an Arcanist container, so you can run Arc on any Docker engine machine
   where you don't want to install PHP
 * to integrate tweaks to an image
+
+Help us prioritize telling us if you need to test one of these features.
 
 ## Troubleshoot
 
@@ -98,6 +125,6 @@ A. You can use bin/config to manually setup any setting you want:
 ```
 docker exec -it nasqueron/phabricator sh
 cd /opt/phabricator
-bin/config set mysql.host ...
-bin/config set mysql.pass ...
+bin/config set mysql.host mysql.domain.tld
+bin/config set mysql.pass somesecureprivilegepassword
 ```
