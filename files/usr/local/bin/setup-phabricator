@@ -16,8 +16,14 @@ if [ -n "$PHABRICATOR_ALT_FILE_DOMAIN" ]; then
 fi
 
 # Mail
-if [ -n "$PHABRICATOR_USE_MAILGUN" ] && [ -n "$PHABRICATOR_DOMAIN" ] ; then
-	bin/config set mailgun.domain $PHABRICATOR_DOMAIN
+if [ -n "$PHABRICATOR_USE_MAILGUN" ]; then
+	bin/config set metamta.mail-adapter PhabricatorMailImplementationMailgunAdapter
+	if [ -n "$PHABRICATOR_DOMAIN" ]; then
+		bin/config set mailgun.domain $PHABRICATOR_DOMAIN
+	fi
+	if [ -n "$PHABRICATOR_MAILGUN_APIKEY" ]; then
+		bin/config set mailgun.api-key $PHABRICATOR_MAILGUN_APIKEY
+	fi
 fi
 
 # Rights
