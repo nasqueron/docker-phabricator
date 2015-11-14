@@ -20,9 +20,17 @@ if [ -n "$PHABRICATOR_USE_MAILGUN" ] && [ -n "$PHABRICATOR_DOMAIN" ] ; then
 	bin/config set mailgun.domain $PHABRICATOR_DOMAIN
 fi
 
+# Installation
+if [ -z "$PHABRICATOR_NO_INSTALL" ]; then
+	bin/storage upgrade --force
+	bin/config set storage.mysql-engine.max-size 8388608
+	bin/config set pygments.enabled true
+fi
+
 # Rights
 chown -R app /var/repo
 
 # We're done
 popd
+sv restart phd
 touch .initialized

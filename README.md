@@ -96,6 +96,7 @@ Variable                      | Phabricator config variable     | Description
 ------------------------------|---------------------------------|------------
 PHABRICATOR_ALT_FILE_DOMAIN   | security.alternate-file-domain  | If set, static files are served through another domain.
 PHABRICATOR_DOMAIN            | /                               | Domain of your instance, matching PHABRICATOR_URL, will be used in the future in our Docker maintenance Phabricator application.
+PHABRICATOR_NO_INSTALL        | /                               | If set, the installation and configuration step will be skipped. Recommended if you deploy your own code to bypass the `bin/storage upgrade` step.
 PHABRICATOR_STORAGE_NAMESPACE | storage.default-namespace       | If set, MySQL databases won't start by phabricator_ but by your namespace, followed by an _.
 PHABRICATOR_TITLE             | /                               | Title of your instance, will be used in the future in our Docker maintenance Phabricator application.
 PHABRICATOR_URL               | phabricator.base-uri            | If set, Phabricator will use it as canonical URL, and will serve Phabricator application to requests for this URL. Mandatory if you use static files separation or Phame.
