@@ -31,4 +31,5 @@ COPY files /
 
 VOLUME ["/opt/phabricator/conf/local", "/var/repo"]
 
+WORKDIR /opt/phabricator
 CMD ["/usr/local/sbin/init-container"]
