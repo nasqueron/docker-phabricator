@@ -25,6 +25,15 @@ if [ -n "$PHABRICATOR_USE_MAILGUN" ]; then
 		bin/config set mailgun.api-key $PHABRICATOR_MAILGUN_APIKEY
 	fi
 fi
+if [ -n "$PHABRICATOR_USE_SENDGRID" ]; then
+	bin/config set metamta.mail-adapter PhabricatorMailImplementationSendGridAdapter
+	if [ -n "$PHABRICATOR_SENDGRID_APIUSER" ]; then
+		bin/config set sendgrid.api-user $PHABRICATOR_SENDGRID_APIUSER
+	fi
+	if [ -n "$PHABRICATOR_SENDGRID_APIKEY" ]; then
+		bin/config set sendgrid.api-key $PHABRICATOR_SENDGRID_APIKEY
+	fi
+fi
 
 # Installation
 if [ -z "$PHABRICATOR_NO_INSTALL" ]; then

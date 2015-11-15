@@ -109,6 +109,14 @@ PHABRICATOR_USE_MAILGUN       | metamta.mail-adapter            | If set, use Ma
 PHABRICATOR_DOMAIN            | mailgun.domain                  | The domain of the Phabricator instance
 PHABRICATOR_MAILGUN_APIKEY    | mailgun.api-key                 | Your Mailgun API key
 
+Environment you should pass if you use the legacy SendGrid mail adapter:
+
+Variable                      | Phabricator config variable     | Description
+------------------------------|---------------------------------|------------
+PHABRICATOR_USE_SENDGRID      | metamta.mail-adapter            | If set, use SendGrid as mail adapter
+PHABRICATOR_SENDGRID_APIUSER  | sendgrid.api-user               | Your SendGrid API username
+PHABRICATOR_SENDGRID_APIKEY   | sendgrid.api-key                | Your SendGrid API key
+
 Environment from linked containers:
 
 Variable                      | Phabricator config variable     | Description
