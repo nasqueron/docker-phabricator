@@ -54,7 +54,7 @@ Parts of the command line with `-e` parameters allow to declare environment vari
 
 See below for the list of them.
 
-### Step 4. If you wish an Aphlict notification server:
+Step 4. If you wish an Aphlict notification server:
 
 Desktop and in app notifications could be handy to let know your Phabricator users of what's going on in real time.
 
