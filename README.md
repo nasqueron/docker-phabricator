@@ -101,6 +101,14 @@ PHABRICATOR_STORAGE_NAMESPACE | storage.default-namespace       | If set, MySQL 
 PHABRICATOR_TITLE             | /                               | Title of your instance, will be used in the future in our Docker maintenance Phabricator application.
 PHABRICATOR_URL               | phabricator.base-uri            | If set, Phabricator will use it as canonical URL, and will serve Phabricator application to requests for this URL. Mandatory if you use static files separation or Phame.
 
+Environment you should pass if you use the recommended Mailgun mail adapter:
+
+Variable                      | Phabricator config variable     | Description
+------------------------------|---------------------------------|------------
+PHABRICATOR_USE_MAILGUN       | metamta.mail-adapter            | If set, use Mailgun as mail adapter
+PHABRICATOR_DOMAIN            | mailgun.domain                  | The domain of the Phabricator instance
+PHABRICATOR_MAILGUN_APIKEY    | mailgun.api-key                 | Your Mailgun API key
+
 Environment from linked containers:
 
 Variable                      | Phabricator config variable     | Description
