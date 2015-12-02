@@ -12,9 +12,7 @@ MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-w
 RUN apt-get update && apt-get install -y \
             mercurial subversion python-pygments openssh-client \
             mysql-client \
-            --no-install-recommends && rm -r /var/lib/apt/lists/* && \
-    pear config-set preferred_state stable && \
-    pecl install APCu
+            --no-install-recommends && rm -r /var/lib/apt/lists/*
 	
 RUN cd /opt && \
     git clone https://github.com/phacility/libphutil.git && \
