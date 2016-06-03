@@ -6,4 +6,6 @@ if [ ! -f .initialized ]; then
 	/usr/local/bin/setup-phabricator
 fi
 
+/usr/sbin/sshd -f /etc/ssh-phabricator/sshd_config
+
 /usr/local/sbin/runsvdir-init
