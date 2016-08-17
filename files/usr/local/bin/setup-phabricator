@@ -4,13 +4,13 @@ pushd /opt/phabricator
 
 # MYSQL
 bin/config set mysql.host mysql
-bin/config set mysql.pass $MYSQL_ENV_MYSQL_ROOT_PASSWORD
+bin/config set mysql.pass "$MYSQL_ENV_MYSQL_ROOT_PASSWORD"
 if [ -n "$PHABRICATOR_STORAGE_NAMESPACE" ]; then
-	bin/config set storage.default-namespace $PHABRICATOR_STORAGE_NAMESPACE
+	bin/config set storage.default-namespace "$PHABRICATOR_STORAGE_NAMESPACE"
 fi
 
 # URLs
-bin/config set phabricator.base-uri $PHABRICATOR_URL
+bin/config set phabricator.base-uri "$PHABRICATOR_URL"
 if [ -n "$PHABRICATOR_ALT_FILE_DOMAIN" ]; then
 	bin/config set security.alternate-file-domain "$PHABRICATOR_ALT_FILE_DOMAIN"
 fi
@@ -19,19 +19,19 @@ fi
 if [ -n "$PHABRICATOR_USE_MAILGUN" ]; then
 	bin/config set metamta.mail-adapter PhabricatorMailImplementationMailgunAdapter
 	if [ -n "$PHABRICATOR_DOMAIN" ]; then
-		bin/config set mailgun.domain $PHABRICATOR_DOMAIN
+		bin/config set mailgun.domain "$PHABRICATOR_DOMAIN"
 	fi
 	if [ -n "$PHABRICATOR_MAILGUN_APIKEY" ]; then
-		bin/config set mailgun.api-key $PHABRICATOR_MAILGUN_APIKEY
+		bin/config set mailgun.api-key "$PHABRICATOR_MAILGUN_APIKEY"
 	fi
 fi
 if [ -n "$PHABRICATOR_USE_SENDGRID" ]; then
 	bin/config set metamta.mail-adapter PhabricatorMailImplementationSendGridAdapter
 	if [ -n "$PHABRICATOR_SENDGRID_APIUSER" ]; then
-		bin/config set sendgrid.api-user $PHABRICATOR_SENDGRID_APIUSER
+		bin/config set sendgrid.api-user "$PHABRICATOR_SENDGRID_APIUSER"
 	fi
 	if [ -n "$PHABRICATOR_SENDGRID_APIKEY" ]; then
-		bin/config set sendgrid.api-key $PHABRICATOR_SENDGRID_APIKEY
+		bin/config set sendgrid.api-key "$PHABRICATOR_SENDGRID_APIKEY"
 	fi
 fi
 
