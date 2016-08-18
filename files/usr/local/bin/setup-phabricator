@@ -4,6 +4,12 @@ pushd /opt/phabricator
 
 # MYSQL
 bin/config set mysql.host mysql
+# mysql.host variable is fixed and should always be set as 'mysql', 
+# according to https://devcentral.nasqueron.org/diffusion/DPHAB/ :
+# > a MySQL container linked as 'mysql' (--link <your MySQL container>:mysql),
+# > which could be the official MySQL image or our nasqueron/mysql image, 
+# > optimized for Phabricator.
+
 bin/config set mysql.pass "$MYSQL_ENV_MYSQL_ROOT_PASSWORD"
 if [ -n "$PHABRICATOR_STORAGE_NAMESPACE" ]; then
 	bin/config set storage.default-namespace "$PHABRICATOR_STORAGE_NAMESPACE"
