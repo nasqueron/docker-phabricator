@@ -38,7 +38,7 @@ fi
 # Installation
 if [ -z "$PHABRICATOR_NO_INSTALL" ]; then
 	bin/storage upgrade --force
-	bin/config set storage.mysql-engine.max-size 8388608
+	bin/config set storage.mysql-engine.max-size $((8*1042*1024))
 	bin/config set pygments.enabled true
 fi
 
@@ -47,5 +47,6 @@ chown -R app /var/repo
 
 # We're done
 popd
+#restart phabricator daemon
 sv restart phd
 touch .initialized
