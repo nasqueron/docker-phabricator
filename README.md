@@ -22,7 +22,7 @@ Step 1. Run a MySQL container:
 
 ```
 docker pull nasqueron/mysql
-docker run -dt --name phabricator-mysql -eMYSQL_ROOT_PASSWORD=somerootpassword nasqueron/mysql
+docker run -dt --name phabricator-mysql -e MYSQL_ROOT_PASSWORD=somerootpassword nasqueron/mysql
 ```
 
 Step 2. Create a directory (or a Docker volume) to host repositories and config:
