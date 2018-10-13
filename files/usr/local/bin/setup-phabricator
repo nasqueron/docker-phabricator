@@ -10,7 +10,12 @@ bin/config set mysql.host mysql
 # > which could be the official MySQL image or our nasqueron/mysql image, 
 # > optimized for Phabricator.
 
-bin/config set mysql.pass "$MYSQL_ENV_MYSQL_ROOT_PASSWORD"
+if [ -n "$DB_USER" ]; then
+	bin/config set mysql.user "$DB_USER"
+	bin/config set mysql.pass "$DB_PASS"
+else
+	bin/config set mysql.pass "$MYSQL_ENV_MYSQL_ROOT_PASSWORD"
+fi
 if [ -n "$PHABRICATOR_STORAGE_NAMESPACE" ]; then
 	bin/config set storage.default-namespace "$PHABRICATOR_STORAGE_NAMESPACE"
 fi
