@@ -1,0 +1,2 @@
+app ALL=(root) SETENV: NOPASSWORD: /usr/bin/git, /usr/lib/git-core/git-http-backend 
+vcs-user ALL=(app) SETENV: NOPASSWD: /usr/bin/git, /usr/lib/git-core/git-http-backend, /usr/lib/git-core/git-upload-pack, /usr/lib/git-core/git-receive-pack
