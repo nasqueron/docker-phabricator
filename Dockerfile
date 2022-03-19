@@ -10,8 +10,8 @@ MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-w
 #
 
 RUN apt-get update && apt-get install -y \
-            mercurial subversion python-pygments openssh-client \
-            mysql-client \
+            mercurial subversion python3-pygments openssh-client \
+            mariadb-client \
             --no-install-recommends && rm -r /var/lib/apt/lists/*
 	
 RUN cd /opt && \
