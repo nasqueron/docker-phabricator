@@ -15,7 +15,6 @@ RUN apt-get update && apt-get install -y \
             --no-install-recommends && rm -r /var/lib/apt/lists/*
 	
 RUN cd /opt && \
-    git clone https://github.com/phacility/libphutil.git && \
     git clone https://github.com/phacility/arcanist.git && \
     git clone https://github.com/phacility/phabricator.git && \
     mkdir -p /var/tmp/phd && \
