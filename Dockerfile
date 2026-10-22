@@ -2,7 +2,7 @@
 # Nasqueron  - Phabricator image
 #
 
-FROM nasqueron/nginx-php-fpm
+FROM nasqueron/nginx-php-fpm:8.2
 MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-win.org>
 
 #
